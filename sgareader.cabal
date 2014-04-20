@@ -1,0 +1,25 @@
+name: sgareader
+version: 0.0.1
+cabal-version: >=1.2
+build-type: Simple
+license: AllRightsReserved
+license-file: ""
+description:
+data-dir: ""
+
+library
+    build-depends: base -any, bytestring -any, parsec -any,
+                   primitive -any, directory
+    exposed-modules: Utils
+    exposed: True
+    buildable: True
+    hs-source-dirs: src
+
+executable sgareader
+    build-depends: base -any, bytestring -any, parsec -any,
+                   primitive -any
+    main-is: Main.hs
+    buildable: True
+    hs-source-dirs: src
+    other-modules: Utils
+
