@@ -20,13 +20,14 @@ import System.Directory
 import GHC.Base
 
 main = do
-  shmid <- liftM (read . head) getArgs
+--  shmid <- liftM (read . head) getArgs
+  let shmid = 265945098
   sessions <- readFile =<< liftM (++ "/ksuse.txt") getCurrentDirectory
   let maybeSessInfo = parse parseSessInfo "" sessions
   case maybeSessInfo of
     Left _  -> putStrLn $ "Could not parse session info"
     Right sessInfo -> do
-      --putStrLn $ "Session addresses are " ++ concat (map (\s -> showHex s "") (sessAddrs sessInfo))
+      putStrLn $ "Session addresses are " ++ concat (map (\s -> showHex s "" ++ " ") (sessAddrs sessInfo))
       attachedAddr <- shmat shmid (sgaBase sessInfo)
       case attachedAddr of
         Nothing -> putStrLn $ "Could not attach to requested " ++ "memory address at shmid "
