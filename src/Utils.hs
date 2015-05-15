@@ -53,13 +53,13 @@ data SessInfo = SessInfo {
 
 parseSgaBase :: CharParser () Integer
 parseSgaBase = do
-  hexChars <- between (string "SGA_BASE=") (string "\n$") (many1 hexDigit)
-  --return $ read $ ("0x" ++) hexChars
-  trace ("SGA_BASE=" ++ hexChars) return $ read $ ("0x" ++) hexChars
+  hexChars <- between (string "SGA_BASE=") (string "\n\n") (many1 hexDigit)
+  return $ read $ ("0x" ++) hexChars
+  --trace ("SGA_BASE=" ++ hexChars) return $ read $ ("0x" ++) hexChars
 
 parseSessAddrs :: CharParser () [Integer]
 parseSessAddrs = do
-  sessAddrs <- manyTill parseSessAddr (string "$\n")
+  sessAddrs <- manyTill parseSessAddr (string "\n")
   return sessAddrs
   --trace (show $ map (\a -> showHex a "") sessAddrs) return sessAddrs
 

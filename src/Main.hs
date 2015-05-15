@@ -27,7 +27,7 @@ main = do
   case maybeSessInfo of
     Left _  -> putStrLn $ "Could not parse session info"
     Right sessInfo -> do
-      putStrLn $ "Session addresses are " ++ concat (map (\s -> showHex s "" ++ " ") (sessAddrs sessInfo))
+      --putStrLn $ "Session addresses are " ++ concat (map (\s -> showHex s "" ++ " ") (sessAddrs sessInfo))
       attachedAddr <- shmat shmid (sgaBase sessInfo)
       case attachedAddr of
         Nothing -> putStrLn $ "Could not attach to requested " ++ "memory address at shmid "
